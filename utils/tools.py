@@ -14,11 +14,39 @@ def adjust_learning_rate(optimizer, epoch, args):
             2: 5e-5, 4: 1e-5, 6: 5e-6, 8: 1e-6,
             10: 5e-7, 15: 1e-7, 20: 5e-8
         }
+    elif args.lradj == 'type3':
+        lr_adjust = {epoch: args.learning_rate if epoch < 3 else args.learning_rate * (0.9 ** ((epoch - 3) // 1))}
     if epoch in lr_adjust.keys():
         lr = lr_adjust[epoch]
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
         print('Updating learning rate to {}'.format(lr))
+
+def adjust_learning_rate_adapative_clr(optimizer, loss, iter, var):
+    current_loss = loss
+    cycle = iter
+    offset = cycle % 2
+
+    max_lr = var['max_lr']
+    min_lr = var['min_lr']
+    step_size = var['step_size']
+    adaptive_treshold = var['adaptive_treshold']
+    prev_loss = var['prev_loss']
+
+    lr = min_lr + offset * step_size
+    if lr > max_lr:
+        lr = max_lr
+    elif lr < min_lr:
+        lr = min_lr
+    
+    if current_loss > prev_loss * adaptive_treshold:
+        var['step_size'] = var['step_size'] * 0.5
+    else:
+        var['step_size'] = var['step_size'] * 2
+    
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
+    print('Updating learning rate to {}'.format(lr))
 
 
 class EarlyStopping:

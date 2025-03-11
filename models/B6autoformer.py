@@ -37,21 +37,21 @@ class Model(nn.Module):
         # for name, param in self.state_dict().items():
         #     print(name)
 
-        for i in range(0,self.num_models):
-            model = self.models[i]
-            if (i%2)==0:
-                for m in model.modules():
-                    if isinstance(m, nn.Linear):
-                        # stdev = np.random.uniform(0, 0.01)
-                        stdev = np.random.uniform(0.001, 0.01)
-                        m.weight.data.normal_(0, stdev)
-                        print("stdev: " +str(stdev))
-            else:
-                for m in model.modules():
-                    if isinstance(m, nn.Linear):
-                        # stdev = random.uniform(0, 1)
-                        # m.weight.data.uniform_(0, 0.01)
-                        m.weight.data.uniform_(0, 0.001)
+        # for i in range(0,self.num_models):
+        #     model = self.models[i]
+        #     if (i%2)==0:
+        #         for m in model.modules():
+        #             if isinstance(m, nn.Linear):
+        #                 # stdev = np.random.uniform(0, 0.01)
+        #                 stdev = np.random.uniform(0.001, 0.01)
+        #                 m.weight.data.normal_(0, stdev)
+        #                 print("stdev: " +str(stdev))
+        #     else:
+        #         for m in model.modules():
+        #             if isinstance(m, nn.Linear):
+        #                 # stdev = random.uniform(0, 1)
+        #                 # m.weight.data.uniform_(0, 0.01)
+        #                 m.weight.data.uniform_(0, 0.001)
 # 
 # 
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec,

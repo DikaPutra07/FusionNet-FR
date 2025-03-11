@@ -1,6 +1,11 @@
-pandas
-sklearn
-torchvision
+pandas==1.4.0
+scikit-learn==1.3.2
+sktime
+torchvision==0.14.1
 numpy
 matplotlib
 reformer_pytorch
+tqdm==4.66.1
+stable-baselines3[extra]
+gymnasium
+gym

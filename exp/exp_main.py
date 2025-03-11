@@ -3,7 +3,7 @@ from exp.exp_basic import Exp_Basic
 from models import Informer, Autoformer, AutoformerMod2, Bautoformer, Uautoformer, Transformer, Reformer
 from utils.tools import EarlyStopping, adjust_learning_rate, visual
 from utils.metrics import metric
-import h5py
+# import h5py
 
 import numpy as np
 import torch
@@ -323,11 +323,11 @@ class Exp_Main(Exp_Basic):
         # fname = "ZZZ_Autoformer_ETTm2_pl"+str(self.args.pred_len)+"_trues.dat"
         # trues.tofile(fname)
 
-        fname = "ZZZ_Autoformer_ETTm2_pl"+str(self.args.pred_len)+".h5"
-        hf = h5py.File(fname, 'w')
-        hf.create_dataset('preds', data=preds)
-        hf.create_dataset('trues', data=trues)
-        hf.close()
+        # fname = "ZZZ_Autoformer_ETTm2_pl"+str(self.args.pred_len)+".h5"
+        # hf = h5py.File(fname, 'w')
+        # hf.create_dataset('preds', data=preds)
+        # hf.create_dataset('trues', data=trues)
+        # hf.close()
 
 
         return
